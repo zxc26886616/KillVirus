@@ -6,13 +6,13 @@ const { ccclass, property } = cc._decorator;
 export default class Logo extends cc.Component {
 
     @property({ type: [cc.Node] })
-    anim: cc.Node[] = [];
+    public anim: cc.Node[] = [];
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad() {
-        let _out = cc.tween().to(0.2, { opacity: 0 });
-        let _in = cc.tween().to(0.2, { opacity: 255 });
+    public onLoad() {
+        const _out = cc.tween().to(0.2, { opacity: 0 });
+        const _in = cc.tween().to(0.2, { opacity: 255 });
         cc.tween(this.anim[0])
             .sequence(_out, _in)
             .repeat(3)
@@ -20,7 +20,7 @@ export default class Logo extends cc.Component {
             .start();
     }
 
-    start() {
+    public start() {
 
     }
 
@@ -44,9 +44,13 @@ export default class Logo extends cc.Component {
             .to(0.5,{x:460.4,y:207.9,scaleX:1,scaleY:1})
             .start();
     }
-    private callBack2(){
-        this.anim[2].getComponent(LogoVirus).Begin();
-        this.anim[3].getComponent(LogoVirus).Begin();
+    private callBack2(){// 病毒2
+        let js = this.anim[3].getComponent(LogoVirus);
+        js.init(401,150,120);
+        js.Begin();
+
+        js = this.anim[2].getComponent(LogoVirus);
+        js.init(440,-66,80);
+        js.Begin();
     }
-    
 }
