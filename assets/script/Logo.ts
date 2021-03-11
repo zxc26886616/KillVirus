@@ -10,6 +10,7 @@ export default class Logo extends cc.Component {
 
     // LIFE-CYCLE CALLBACKS:
 
+    // 播放动画
     public PlayLoop() {
         const _out = cc.tween().to(0.2, { opacity: 0 });
         const _in = cc.tween().to(0.2, { opacity: 255 });
@@ -19,7 +20,7 @@ export default class Logo extends cc.Component {
             .call(this.callBack0.bind(this))
             .start();
     }
-
+    // 重置
     public Reset() {
         this.anim[0].active = true;
         this.anim[1].active = false;
