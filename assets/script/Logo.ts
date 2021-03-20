@@ -12,6 +12,7 @@ export default class Logo extends cc.Component {
 
     // 播放动画
     public PlayLoop() {
+
         const _out = cc.tween().to(0.2, { opacity: 0 });
         const _in = cc.tween().to(0.2, { opacity: 255 });
         cc.tween(this.anim[0])
@@ -23,23 +24,43 @@ export default class Logo extends cc.Component {
     // 重置
     public Reset() {
         this.anim[0].active = true;
-        this.anim[1].active = false;
+
         // 缩放
-        this.anim[1].setScale(cc.v2(0,1));
+        this.anim[1].scaleX = 0;
+        this.anim[1].opacity = 255;
+
         // icon
-        this.anim[2].setPosition(cc.v2(276,32));
-        this.anim[2].setScale(cc.v2(0.2,0.2));
-        this.anim[3].setPosition(cc.v2(277,53));
-        this.anim[3].setScale(cc.v2(0.2,0.2));
+        this.anim[2].setPosition(cc.v2(276, 32));
+        this.anim[2].setScale(cc.v2(0.2, 0.2));
+        this.anim[3].setPosition(cc.v2(277, 53));
+        this.anim[3].setScale(cc.v2(0.2, 0.2));
 
         // 动画暂停
-
+        cc.Tween.stopAll();
     }
+
+    public moveOut() {
+        this.Reset();
+        this.node.setPosition(cc.v2(-36, 456))
+        cc.tween(this.node)
+            .to(0.5, { y: 980 }, { easing: "cubicIn" })
+            .start();
+    }
+
+    public moveIn() {
+        this.Reset();
+        this.node.setPosition(cc.v2(-36, 980))
+        cc.tween(this.node)
+            .to(0.5, { y: 456 }, { easing: "cubicIn" })
+            .start();
+    }
+
     protected onLoad() {
 
     }
 
     private callBack0() {
+        console.log("this.anim[1]", this.anim[1].scaleX);
         cc.tween(this.anim[1])
             .to(1, { scaleX: 1 })
             .call(this.callBack1.bind(this))
@@ -83,4 +104,6 @@ export default class Logo extends cc.Component {
             .repeatForever()
             .start();
     }
+
+
 }
