@@ -14,6 +14,7 @@ export default class NewClass extends cc.Component {
     protected onLoad() {
         this.boss.active = false;
         this.bBoss = false;
+        this.number.string = "0";
     }
 
     public setNumber(num: number) {
