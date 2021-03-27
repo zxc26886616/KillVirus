@@ -45,7 +45,7 @@ export default class LevelDesign extends cc.Component {
     public play() {
         for (let i = 1; i < array.length; i++) {
             const element = array[i];
-            
+            // 123
         }
     }
 
