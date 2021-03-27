@@ -60,7 +60,7 @@ export default class Logo extends cc.Component {
     }
 
     private callBack0() {
-        console.log("this.anim[1]", this.anim[1].scaleX);
+        // console.log("this.anim[1]", this.anim[1].scaleX);
         cc.tween(this.anim[1])
             .to(1, { scaleX: 1 })
             .call(this.callBack1.bind(this))
