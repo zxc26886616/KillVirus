@@ -17,14 +17,15 @@ export default class GameControl extends cc.Component {
     }
     protected start() {
         this.LevelDesign.getComponent(LevelDesign).reset();
-        
     }
 
     public test1(target, data) {
         if (data === "重置") {
             this.Logo.getComponent(Logo).Reset();
+            this.LevelDesign.getComponent(LevelDesign).reset();
         } else if (data === "播放") {
             this.Logo.getComponent(Logo).PlayLoop();
+            this.LevelDesign.getComponent(LevelDesign).play();
         } else if (data === "移出") {
             this.Logo.getComponent(Logo).moveOut();
         } else if (data === "移入") {

@@ -10,7 +10,6 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
 
-    
     protected onLoad() {
         cc.tween(this.node)
             .to(10, { x: 300 }, { easing: bounceOut })

@@ -18,10 +18,11 @@ export default class LevelDesign extends cc.Component {
     public basePos: any = new Array();
 
     protected onLoad() {
-        this.curLevel = 1;
+        this.curLevel = 2;
 
         for (let i = 0; i < this.Item.length; i++) {
             this.basePos[i] = this.Item[i].getPosition();
+            console.log(this.basePos[i]);
         }
     }
     protected start() {
@@ -37,16 +38,58 @@ export default class LevelDesign extends cc.Component {
 
         for (let i = 0; i < this.Item.length; i++) {
             this.Item[i].getComponent(LevelItem).setNumber(starLevel + i);
+            // console.log(this.basePos[i]);
+            this.Item[i].setPosition(this.basePos[i]);
         }
-        this.Item[0].active = false;
-        this.Item[4].active = false;
+        this.Item[0].opacity = 0;
+        this.Item[4].opacity = 0;
+        this.Item[1].opacity = 255;
+        this.Item[2].setScale(1);
+        this.Item[3].setScale(0.6);
     }
 
     public play() {
-        for (let i = 1; i < array.length; i++) {
-            const element = array[i];
-            // 123
+
+        for (let i = 1; i < this.Item.length; i++) {
+            const moveTo = cc.tween().to(0.5, { position: this.Item[i - 1].position })
+            if (i === 1) {
+                const out = cc.fadeOut(0.5);
+                cc.tween(this.Item[i])
+                    .parallel(
+                        moveTo, out
+                    )
+                    .start();
+            } else if (i === 2) {
+                const scale = cc.tween().to(0.5, { scale: 0.6 })
+                cc.tween(this.Item[i])
+                    .parallel(
+                        moveTo, scale
+                    )
+                    .start();
+            } else if (i === 3) {
+                const scale = cc.tween().to(0.5, { scale: 1 })
+                cc.tween(this.Item[i])
+                    .parallel(
+                        moveTo, scale
+                    )
+                    .start();
+            } else if (i === 4) {
+                const _in = cc.fadeIn(0.5);
+                cc.tween(this.Item[i])
+                    .parallel(
+                        _in, moveTo
+                    ).start();
+            } else {
+                cc.tween(this.Item[i])
+                    .then(moveTo)
+                    .start()
+            }
         }
+        const self = this;
+        this.scheduleOnce(() => {
+            self.curLevel++;
+            self.reset();
+        }, 0.5);
     }
 
     // public ctor() {
