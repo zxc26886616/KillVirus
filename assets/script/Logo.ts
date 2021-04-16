@@ -43,7 +43,7 @@ export default class Logo extends cc.Component {
         this.Reset();
         this.node.setPosition(cc.v2(-36, 456))
         cc.tween(this.node)
-            .to(0.5, { y: 980 }, { easing: "cubicIn" })
+            .to(0.5, { y: 980 }, { easing: "backIn" })
             .start();
     }
 
@@ -51,7 +51,7 @@ export default class Logo extends cc.Component {
         this.Reset();
         this.node.setPosition(cc.v2(-36, 980))
         cc.tween(this.node)
-            .to(0.5, { y: 456 }, { easing: "cubicIn" })
+            .to(0.5, { y: 456 }, { easing: "backOut" })
             .start();
     }
 
@@ -83,13 +83,13 @@ export default class Logo extends cc.Component {
         this.flicker(this.anim[1]);
     }
     private callBack2() {// 病毒2
-        let js = this.anim[3].getComponent(LogoVirus);
-        js.init(401, 150, 120);
-        js.Begin();
+        let _js = this.anim[3].getComponent(LogoVirus);
+        _js.init(401, 150, 120);
+        _js.Begin();
 
-        js = this.anim[2].getComponent(LogoVirus);
-        js.init(440, -66, 80);
-        js.Begin();
+        _js = this.anim[2].getComponent(LogoVirus);
+        _js.init(440, -66, 80);
+        _js.Begin();
     }
 
     /**

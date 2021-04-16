@@ -1,5 +1,6 @@
 import LevelDesign from "./LevelDesign";
 import Logo from "./Logo";
+import Top from "./top";
 
 const { ccclass, property } = cc._decorator;
 
@@ -10,6 +11,9 @@ export default class GameControl extends cc.Component {
 
     @property({ type: cc.Node })
     private LevelDesign: cc.Node = null;
+
+    @property({ type: cc.Node })
+    private top: cc.Node = null;
 
     protected onLoad() {
         this.Logo.getComponent(Logo).PlayLoop();
@@ -28,8 +32,10 @@ export default class GameControl extends cc.Component {
             this.LevelDesign.getComponent(LevelDesign).play();
         } else if (data === "移出") {
             this.Logo.getComponent(Logo).moveOut();
+            this.top.getComponent(Top).moveOut();
         } else if (data === "移入") {
             this.Logo.getComponent(Logo).moveIn();
+            this.top.getComponent(Top).moveIn();
         }
 
     }

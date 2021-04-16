@@ -22,7 +22,7 @@ export default class LevelDesign extends cc.Component {
 
         for (let i = 0; i < this.Item.length; i++) {
             this.basePos[i] = this.Item[i].getPosition();
-            console.log(this.basePos[i]);
+            // console.log(this.basePos[i]);
         }
     }
     protected start() {
@@ -40,6 +40,8 @@ export default class LevelDesign extends cc.Component {
             this.Item[i].getComponent(LevelItem).setNumber(starLevel + i);
             // console.log(this.basePos[i]);
             this.Item[i].setPosition(this.basePos[i]);
+
+            this.Item[i].getComponent(LevelItem).setIndex(i);
         }
         this.Item[0].opacity = 0;
         this.Item[4].opacity = 0;
@@ -59,6 +61,7 @@ export default class LevelDesign extends cc.Component {
                         moveTo, out
                     )
                     .start();
+                    this.Item[i].getComponent(LevelItem).showPointIndex(-1);
             } else if (i === 2) {
                 const scale = cc.tween().to(0.5, { scale: 0.6 })
                 cc.tween(this.Item[i])
@@ -66,6 +69,7 @@ export default class LevelDesign extends cc.Component {
                         moveTo, scale
                     )
                     .start();
+                    this.Item[i].getComponent(LevelItem).showPointIndex(1);
             } else if (i === 3) {
                 const scale = cc.tween().to(0.5, { scale: 1 })
                 cc.tween(this.Item[i])
@@ -73,6 +77,7 @@ export default class LevelDesign extends cc.Component {
                         moveTo, scale
                     )
                     .start();
+                this.Item[i].getComponent(LevelItem).showPointIndex(0);
             } else if (i === 4) {
                 const _in = cc.fadeIn(0.5);
                 cc.tween(this.Item[i])
